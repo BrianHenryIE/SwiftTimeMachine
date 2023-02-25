@@ -12,7 +12,8 @@ let package = Package(
             // Products define the executables and libraries a package produces, and make them visible to other packages.
             .library(
                     name: "SwiftTimeMachine",
-                    targets: ["SwiftTimeMachine"]),
+                    targets: ["SwiftTimeMachine"]
+            ),
         ],
         dependencies: [
             // Dependencies declare other packages that this package depends on.
@@ -30,7 +31,9 @@ let package = Package(
                     name: "SwiftTimeMachine",
                     dependencies: [
                         .product(name: "Collections", package: "swift-collections")
-                    ]),
+                    ],
+                    path: "Sources"
+            ),
             .testTarget(
                     name: "SwiftTimeMachineTests",
                     dependencies: [
