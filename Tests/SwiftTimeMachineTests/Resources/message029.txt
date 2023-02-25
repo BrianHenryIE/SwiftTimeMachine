@@ -1,0 +1,4 @@
+2023-02-17 20:55:50.130298-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:CopyProgress] Time Estimates Evaluation
+Actual: 68.42394308447838 minutes
+Mean variance: -2.433527347394099 minutes (-4%)
+Time without estimate: 0.8333333333333334 minutes

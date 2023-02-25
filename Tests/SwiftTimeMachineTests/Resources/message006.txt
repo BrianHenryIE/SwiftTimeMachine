@@ -1,0 +1,1 @@
+2023-02-17 19:47:06.837740-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:EventCollection] Finishing "Data":  228645 (53%) of 100% - 3 viewpoints Average Speed: 138.83 events/s

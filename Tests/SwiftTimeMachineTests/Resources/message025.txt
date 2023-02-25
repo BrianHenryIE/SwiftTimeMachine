@@ -1,0 +1,11 @@
+2023-02-17 20:55:37.868571-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:CopyProgress] Finished copying from volume "Data"
+	      247335 Total Items Added (l: 42.28 GB p: 42.26 GB)
+	      498907 Total Items Propagated (shallow) (l: Zero KB p: Zero KB)
+	    10514978 Total Items Propagated (recursive) (l: 1.66 TB p: 1.66 TB)
+	    10762313 Total Items in Backup (l: 1.7 TB p: 1.7 TB)
+	      181362 Files Copied (l: 42.27 GB p: 42.26 GB)
+	       60010 Directories Copied (l: Zero KB p: Zero KB)
+	        5870 Symlinks Copied (l: 178 KB p: Zero KB)
+	          93 Files Linked (l: 4 MB p: 4.2 MB)
+	      415291 Files Link Skipped (l: Zero KB p: Zero KB) | 415291 items propagated (l: 154.57 GB p: 153.43 GB)
+	       83616 Directories Link Skipped (l: Zero KB p: Zero KB) | 9600780 items propagated (l: 1.51 TB p: 1.51 TB)

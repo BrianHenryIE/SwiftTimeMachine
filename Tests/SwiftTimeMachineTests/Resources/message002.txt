@@ -1,0 +1,4 @@
+2023-02-17 19:43:52.982705-0800 0x14fc411  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:EventCollectionProgress] 203190 (52%):
+	52% - "Data" 100% : ByCountedEvents:-,0,0/0,ByFileIDConvergence:100%,174314,ByCreatedFileIDCount:5%,174314
+		Speed: 0.02 events/s Average: 137.09 events/s
+		Current: "cores"
