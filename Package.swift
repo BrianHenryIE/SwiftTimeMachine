@@ -39,9 +39,7 @@ let package = Package(
                     dependencies: [
                         "SwiftTimeMachine"
                     ],
-                    resources: [
-                        .process("Resources"),
-                    ]
+                    path: "Tests"
             ),
         ]
 )
