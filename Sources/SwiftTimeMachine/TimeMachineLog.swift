@@ -8,19 +8,10 @@
 
 import Foundation
 import DequeModule
+import BHSwiftOSLogStream
 
-extension Notification.Name {
+public extension Notification.Name {
 
-    struct TimeMachineLog {
-        // Captials/no capitals convention?
-        static let All = NSNotification.Name("ie.brianhenryie.timemachinelog.all")
-        static let AfterCompletedBackup = NSNotification.Name("ie.brianhenryie.timemachinelog.aftercompletedbackup")
-        static let AfterThinning = NSNotification.Name("ie.brianhenryie.timemachinelog.afterthinning")
-        static let AfterCompletedBackupNoThinning = NSNotification.Name("ie.brianhenryie.timemachinelog.aftercompletedbackupnothinning")
-
-    }
-
-    // Captials/no capitals convention?
     static let TimeMachineLogAll = NSNotification.Name("ie.brianhenryie.timemachinelog.all")
     static let TimeMachineLogAfterCompletedBackup = NSNotification.Name("ie.brianhenryie.timemachinelog.aftercompletedbackup")
     static let TimeMachineLogAfterThinning = NSNotification.Name("ie.brianhenryie.timemachinelog.afterthinning")
@@ -29,60 +20,58 @@ extension Notification.Name {
 }
 
 @available(macOS 10.13, *)
-public class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
+open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
 
     // "static properties are executed lazily by default".
     // i.e. reading of the log file will not begin unless a notification is subscribed to.
     public static let shared = TimeMachineLog()
 
-    private var previousInfoLogs = RecentLogs(maxSize: 3)
+    public private(set) var previousInfoLogs = History<LogEntry>(maxSize: 3)
 
     override init() {
         super.init()
 
-        let stream = LogStream(delegate: self)
-        stream.listen(subsystem: "com.apple.TimeMachine")
+        let stream = LogStream(subsystem: "com.apple.TimeMachine", delegate: self)
     }
 
-    func newLogEntry(entry logEntry: LogEntry) {
+    public func newLogEntry(entry logEntry: LogEntry, history: History<LogEntry>) {
 
         let logMessage = logEntry.message
-        print(logMessage)
 
         if let captureRange = logMessage.range(of: #"Mountpoint '(/Volumes/.*?)' is still valid"#,
                 options: .regularExpression),
-           let previousLogMessage = previousInfoLogs.last() {
+            let previousLogMessage = previousInfoLogs.get() {
 
             let volume = logMessage[captureRange]
 
             switch previousLogMessage {
-            case _ where previousInfoLogs.last()?.contains("Completed backup") ?? false:
+            case _ where previousInfoLogs.get()?.message.contains("Completed backup") ?? false:
 
                 print("\n\nBackup to \(volume) complete.\n\n")
 
-                self.post(name: .TimeMachineLogAfterCompletedBackup, object: nil)
-            case _ where previousInfoLogs.get(at: -1)?.starts(with:"Thinning") ?? false:
+                self.post(name: .TimeMachineLogAfterCompletedBackup, object: self)
+            case _ where previousInfoLogs.get()?.message.starts(with:"Thinning") ?? false:
 
                 print("\n\nBackup to \(volume) and cleanup complete.\n\n")
 
-                self.post(name: .TimeMachineLogAfterThinning, object: nil)
-            case _ where previousInfoLogs.get(at: -1)?.starts(with:"Mountpoint") ?? false
-                    && previousInfoLogs.get(at: -1)?.starts(with:"Thinning") ?? false:
+                self.post(name: .TimeMachineLogAfterThinning, object: self)
+            case _ where previousInfoLogs.get()?.message.starts(with:"Mountpoint") ?? false
+                && previousInfoLogs.get()?.message.starts(with:"Thinning") ?? false:
 
                 print("\n\nBackup to \(volume) complete without cleanup.\n\n")
 
-                self.post(name: .TimeMachineLogAfterCompletedBackupNoThinning, object: nil)
+                self.post(name: .TimeMachineLogAfterCompletedBackupNoThinning, object: self)
             default:
-                print("\(logMessage) message followed: \(previousInfoLogs.last() ?? "nothing")")
+                print("\(logMessage) message followed: \(previousInfoLogs.get()?.message ?? "nothing")")
                 break
             }
 
         }
 
-        self.post(name: .TimeMachineLogAll, object: nil)
+        self.post(name: .TimeMachineLogAll, object: self)
 
         if( logEntry.logType == .Info ) {
-            previousInfoLogs.append(message: String(logMessage))
+            previousInfoLogs.append(item: logEntry)
         }
     }
 }
