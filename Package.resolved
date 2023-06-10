@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "bhswiftoslogstream",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BrianHenryIE/BHSwiftOSLogStream",
+      "state" : {
+        "branch" : "master",
+        "revision" : "7892511824f276194f7ff526146598cd3891d957"
+      }
+    },
+    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
