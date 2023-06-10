@@ -51,6 +51,22 @@ public struct TmStatus: TmResult, CustomStringConvertible {
                 .any
             }
 
+            // `    BackupPhase = PreparingSourceVolumes;`
+            Optionally {
+                "\u{A}    BackupPhase = "
+                TryCapture(as: backupPhase) {
+                    OneOrMore(.word)
+                } transform: {
+                    TmStatus.BackUpPhase(rawValue: String($0))
+                }
+                ";"
+
+                // In case there are unaccounted for properties.
+                ZeroOrMore(.reluctant) {
+                    .any
+                }
+            }
+
             // ClientID is alway present.
             // ClientID = "com.apple.backupd";
             "\u{A}    ClientID = \""
@@ -110,8 +126,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
             return nil
         }
 
-//        self.backupPhase = matches[backupPhase] ?? nil
-        self.backupPhase = nil
+        self.backupPhase = matches[backupPhase] ?? nil
 
         self.clientId = String(matches[clientId])
 
