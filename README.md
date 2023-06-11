@@ -40,7 +40,7 @@ TimeMachineLog.shared.addObserver(
 .package( url: "https://github.com/BrianHenryIE/SwiftTimeMachine", branch: "master" )
 ```
 
-You might want to pin that to a commit in case I change things. I don't write Swift in my day job.
+You might want to pin that to a commit in case I change things. I don't write Swift in my day job (but this was mostly test driven).
 
 ## Notes
 
@@ -49,10 +49,10 @@ Sometimes does thinning
 Completed backup: 2022-05-21-120849
 Mountpoint '/Volumes/8tb' is still valid
 Thinning 3 backups using age-based thinning, expected free space: 678.7 GB actual free space: 678.7 GB trigger 50 GB thin 83.33 GB dates: (
-"2022-05-18-145930",
-"2022-05-18-155714",
-"2022-05-18-165813"
-//)
+ "2022-05-18-145930",
+ "2022-05-18-155714",
+ "2022-05-18-165813"
+)
 Mountpoint '/Volumes/8tb' is still valid
 ```
 
@@ -63,7 +63,6 @@ Mountpoint '/Volumes/8tb' is still valid
 Mountpoint '/Volumes/8tb' is still valid
 ```
 
-## Links 
 
 * https://stackoverflow.com/questions/54927655/event-notifications-in-macos
 
@@ -72,6 +71,8 @@ This project currently uses [Swift OS Log Stream](https://github.com/BrianHenryI
 > DistributedNotificationCenter.default().addObserver(self, selector: #selector(handleNotifications), name: nil, object: nil)
 >
 > "You have to filter the notifications related to Time Machine. You can also observe specific notifications via the name parameter"
+
+## Links
 
 * https://fig.io/manual/tmutil/
 
