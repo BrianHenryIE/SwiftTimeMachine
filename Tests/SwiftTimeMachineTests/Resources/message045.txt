@@ -1,1 +1,0 @@
-2023-02-18 14:58:27.843968-0800 0x1909dc8  Info        0x0                  88866  0    backupd: (TimeMachine) [com.apple.TimeMachine:LocalSnapshotManagement] Created Time Machine local snapshot with name 'com.apple.TimeMachine.2023-02-18-145826.local' on disk '/System/Volumes/Data'

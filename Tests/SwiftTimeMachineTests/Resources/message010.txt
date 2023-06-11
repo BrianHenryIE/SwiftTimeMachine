@@ -1,1 +1,0 @@
-2023-02-17 19:47:07.187936-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:CopyProgress] Starting propagation look-ahead for "Data"

@@ -1,8 +1,0 @@
-2023-02-17 19:47:06.836046-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:EventCollection] Finished collecting events from volume "Data"
-	       21704 Total Items Changed
-Change Overview:
-100% (21704): <Root of Tree>
-76%  (16614): Users/brianhenry
-24%  (5276): Users/brianhenry/Sites
-17%  (3853): Applications
-17%  (3772): Users/brianhenry/rsyncsites

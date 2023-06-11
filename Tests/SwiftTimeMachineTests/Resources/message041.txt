@@ -1,1 +1,0 @@
-2023-02-17 21:55:25.865468-0800 0x158109d  Info        0x0                  19693  0    backupd: (TimeMachine) [com.apple.TimeMachine:LocalThinning] Starting age based thinning of Time Machine local snapshots on disk '/System/Volumes/Data'

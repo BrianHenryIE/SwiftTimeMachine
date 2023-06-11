@@ -1,1 +1,0 @@
-2023-02-17 20:55:37.939224-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:CloneCollection] Found 229 perfect clone families, 2 partial clone families. Shared space 116.6 MB (116636387 bytes).

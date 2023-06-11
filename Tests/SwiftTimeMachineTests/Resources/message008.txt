@@ -1,1 +1,0 @@
-2023-02-17 19:47:07.157189-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:SizingProgress] Estimated a total of 10139618 files (1.9 TB) will be in backup of 'Data'

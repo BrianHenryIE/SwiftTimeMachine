@@ -1,1 +1,0 @@
-2023-02-17 19:47:03.991637-0800 0x14cbf68  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:EventCollection] Finished secondary scan of Data

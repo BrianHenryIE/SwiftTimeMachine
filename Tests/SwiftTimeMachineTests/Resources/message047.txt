@@ -1,1 +1,0 @@
-2023-02-18 15:58:36.920164-0800 0x193ec39  Info        0x0                  19084  0    backupd-helper: (TimeMachine) [com.apple.TimeMachine:PowerManagement] TMPowerState: 1

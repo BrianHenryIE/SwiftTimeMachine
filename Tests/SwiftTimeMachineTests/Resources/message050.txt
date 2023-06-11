@@ -1,1 +1,0 @@
-2023-02-18 16:04:16.017355-0800 0x193ec2e  Info        0x0                  19084  0    backupd-helper: (TimeMachine) [com.apple.TimeMachine:BackupScheduling] Triggered for screen unlock!

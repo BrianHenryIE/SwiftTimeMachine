@@ -1,1 +1,0 @@
-2023-02-17 19:47:29.082901-0800 0x1500922  Info        0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:PropagationLookAheads] Found 205.86 GB (450 items) of content to propagate down to depth 3 under "/Volumes/com.apple.TimeMachine.localsnapshots/Backups.backupdb/Brian’s MacBook Air/2023-02-17-184528/Data"

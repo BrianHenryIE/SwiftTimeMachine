@@ -1,1 +1,0 @@
-2023-02-17 19:54:25.633006-0800 0x150c949  Error       0x0                  23864  0    backupd: (TimeMachine) [com.apple.TimeMachine:Spotlight] Bulk setting Spotlight attributes failed.
