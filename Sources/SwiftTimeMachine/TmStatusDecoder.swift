@@ -115,7 +115,12 @@ extension KeyedDecodingContainer {
 class TmStatusDecoder: JSONDecoder {
 
     func decode(from data: Input) -> TmStatus? {
-        try? decode(TmStatus.self, from: data)
+        if let decoded = try? decode(TmStatus.self, from: data) {
+            return decoded
+        } else {
+            print( String(data: data, encoding: String.Encoding.utf8) ?? "failed to show TmStatus parse failure message")
+            return nil
+        }
     }
 
     override func decode<T>(_ type: T.Type, from: Input) throws -> T where T: Decodable {
