@@ -70,6 +70,7 @@ final class TmStatusTests: XCTestCase {
         dateComponents.hour = 1
         dateComponents.minute = 8
         dateComponents.second = 48
+        dateComponents.timeZone = TimeZone.gmt
 
         let expectedDate = Calendar.current.date(from: dateComponents) ?? Date()
         XCTAssertEqual( expectedDate, tmStatus.dateOfStateChange! )
