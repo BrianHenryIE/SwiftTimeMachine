@@ -17,7 +17,7 @@ extension TmStatus {
 
 }
 
-public struct TmStatus: TmResult, Decodable, CustomStringConvertible {
+public struct TmStatus: TmResult, Decodable {
 
     public let backupPhase: BackUpPhase?
     public let clientID: String // = "com.apple.backupd";
@@ -31,9 +31,4 @@ public struct TmStatus: TmResult, Decodable, CustomStringConvertible {
     public let running: IntEncodedBool // = 1;
     public let stopping: IntEncodedBool? // = 0;
 
-    public var description: String {
-        return ""
-//        var desc = "Backup session status:\n"
-//        return desc
-    }
 }
