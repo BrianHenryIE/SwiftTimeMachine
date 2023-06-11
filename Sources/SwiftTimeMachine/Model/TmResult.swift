@@ -4,4 +4,4 @@
 
 import Foundation
 
-protocol TmResult {}
+public protocol TmResult {}

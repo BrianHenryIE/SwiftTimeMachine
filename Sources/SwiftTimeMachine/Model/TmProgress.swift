@@ -4,7 +4,6 @@
 
 import Foundation
 
-
 public struct TmProgress: Decodable {
     public let percent: StringEncodedDouble // = "0.5918951939599612";
     public let timeRemaining: StringEncodedDouble? // = "148.7789304643575";
@@ -16,4 +15,3 @@ public struct TmProgress: Decodable {
     public let totalBytes: Int // = 1805307203584;
     public let totalFiles: Int // = 10159895;
 }
-

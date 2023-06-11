@@ -6,7 +6,7 @@
 import Foundation
 import RegexBuilder
 
-struct TmVersion: TmResult, CustomStringConvertible {
+public struct TmVersion: TmResult, CustomStringConvertible {
 
     let version: String
     let buildDate: Date
