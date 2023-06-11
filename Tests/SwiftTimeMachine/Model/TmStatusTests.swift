@@ -76,7 +76,7 @@ final class TmStatusTests: XCTestCase {
         XCTAssertEqual( expectedDate, tmStatus.dateOfStateChange! )
 
         // DestinationID = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
-//        XCTAssertEqual( "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB", tmStatus.destinationId! )
+        XCTAssertEqual( "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB", tmStatus.destinationId! )
 
         // DestinationMountPoint = "/Volumes/8tb";
 //        XCTAssertEqual( "/Volumes/8tb", tmStatus.destinationMountPoint! )

@@ -29,6 +29,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
     public let backupPhase: BackUpPhase?
     public let clientId: String // = "com.apple.backupd";
     public let dateOfStateChange: Date? // = "2023-02-27 01:11:08 +0000";
+    public let destinationId: String? // UUID? = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
     public let destinationMountPoint: String? // = "/Volumes/8tb";
     public let percent: Double? // = -1;
     public let running: Bool // = 1;
@@ -38,6 +39,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
         let backupPhase = Reference(BackUpPhase?.self)
         let clientId = Reference(Substring.self)
         let dateOfStateChange = Reference(Date?.self)
+        let destinationId = Reference(String?.self)
         let destinationMountPoint = Reference(String?.self)
         let percent = Reference(Double?.self)
         let running = Reference(Bool.self)
@@ -126,6 +128,28 @@ public struct TmStatus: TmResult, CustomStringConvertible {
                     .any
                 }
             }
+            // `    DestinationID = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";`
+            Optionally {
+                "\u{A}    DestinationID = \""
+                Capture(as: destinationId) {
+                    OneOrMore {
+                        CharacterClass(
+                                .anyOf("-"),
+                                ("A"..."Z"),
+                                ("0"..."9")
+                        )
+                    }
+                } transform: {
+                   String($0)
+                }
+                "\";"
+
+                // In case there are unaccounted for properties.
+                ZeroOrMore(.reluctant) {
+                    .any
+                }
+            }
+
             // `    Percent = "-1";`
             Optionally {
                 "\u{A}    Percent = \""
@@ -175,6 +199,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
         self.dateOfStateChange = matches[dateOfStateChange] ?? nil
 
 
+        self.destinationId = matches[destinationId]
 //            self.destinationMountPoint = matches[destinationMountPoint]
             self.destinationMountPoint = nil
 
