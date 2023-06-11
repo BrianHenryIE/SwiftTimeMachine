@@ -45,6 +45,9 @@ struct TmVersion: TmResult, CustomStringConvertible {
                 return dateFormatter.date(from: String($0))
             }
             ")"
+            ZeroOrMore {
+                .any
+            }
         }
                 .anchorsMatchLineEndings()
 
