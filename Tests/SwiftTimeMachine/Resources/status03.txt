@@ -1,0 +1,14 @@
+Backup session status:
+{
+    BackupPhase = FindingChanges;
+    ChangedItemCount = 1810;
+    ClientID = "com.apple.backupd";
+    DateOfStateChange = "2023-02-27 01:08:53 +0000";
+    DestinationID = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
+    DestinationMountPoint = "/Volumes/8tb";
+    FractionDone = 1;
+    FractionOfProgressBar = "0.1";
+    Running = 1;
+    Stopping = 0;
+    sizingFreePreflight = 1;
+}

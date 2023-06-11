@@ -1,0 +1,21 @@
+Backup session status:
+{
+    BackupPhase = Copying;
+    ClientID = "com.apple.backupd";
+    DateOfStateChange = "2023-02-27 01:08:54 +0000";
+    DestinationID = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
+    DestinationMountPoint = "/Volumes/8tb";
+    FractionOfProgressBar = "0.9";
+    Progress =     {
+        Percent = "0.005664367164145429";
+        "_raw_Percent" = "0.005664367164145429";
+        "_raw_totalBytes" = 1805307203584;
+        bytes = 0;
+        files = 0;
+        sizingFreePreflight = 1;
+        totalBytes = 1805307203584;
+        totalFiles = 10159895;
+    };
+    Running = 1;
+    Stopping = 0;
+}

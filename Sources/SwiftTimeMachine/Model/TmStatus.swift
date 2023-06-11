@@ -6,212 +6,34 @@
 import Foundation
 import RegexBuilder
 
-public struct TmStatus: TmResult, CustomStringConvertible {
 
-    public struct Progress {
-        public let percent: Double // = "0.5918951939599612";
-        public let timeRemaining: Double // = "148.7789304643575";
-        public let rawPercent: Double // "_raw_Percent" = "0.5918951939599612";
-        public let rawTotalBytes: Int // "_raw_totalBytes" = 1805307203584;
-        public let bytes: Int // = 831418368;
-        public let files: Int // = 457;
-        public let sizingFreePreflight: Bool // = 1;
-        public let totalBytes: Int // = 1805307203584;
-        public let totalFiles: Int // = 10159895;
-    }
+extension TmStatus {
 
-    public enum BackUpPhase: String {
+    public enum BackUpPhase: String, Decodable {
         case PreparingSourceVolumes = "PreparingSourceVolumes"
         case FindingChanges = "FindingChanges"
         case Copying = "Copying"
     }
 
+}
+
+public struct TmStatus: TmResult, Decodable, CustomStringConvertible {
+
     public let backupPhase: BackUpPhase?
-    public let clientId: String // = "com.apple.backupd";
+    public let clientID: String // = "com.apple.backupd";
     public let dateOfStateChange: Date? // = "2023-02-27 01:11:08 +0000";
-    public let destinationId: String? // UUID? = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
+    public let destinationID: String? // UUID? = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
     public let destinationMountPoint: String? // = "/Volumes/8tb";
+    public let fractionDone: Double?
+    public let fractionOfProgressBar: StringEncodedDouble? // = "0.9";
     public let percent: Double? // = -1;
-    public let running: Bool // = 1;
-
-    public init?(message: String) {
-
-        let backupPhase = Reference(BackUpPhase?.self)
-        let clientId = Reference(Substring.self)
-        let dateOfStateChange = Reference(Date?.self)
-        let destinationId = Reference(String?.self)
-        let destinationMountPoint = Reference(String?.self)
-        let percent = Reference(Double?.self)
-        let running = Reference(Bool.self)
-
-        let regex = Regex {
-
-            "Backup session status:\u{A}{"
-
-            // In case there are unaccounted for properties.
-            ZeroOrMore(.reluctant) {
-                .any
-            }
-
-            // `    BackupPhase = PreparingSourceVolumes;`
-            Optionally {
-                "\u{A}    BackupPhase = "
-                TryCapture(as: backupPhase) {
-                    OneOrMore(.word)
-                } transform: {
-                    TmStatus.BackUpPhase(rawValue: String($0))
-                }
-                ";"
-
-                // In case there are unaccounted for properties.
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-
-            // ClientID is alway present.
-            // ClientID = "com.apple.backupd";
-            "\u{A}    ClientID = \""
-            Capture(as: clientId) {
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-            "\";"
-
-            Optionally {
-                // In case there are unaccounted for properties.
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-
-            // `    DateOfStateChange = "2023-02-27 01:08:48 +0000";
-            Optionally {
-                "\u{A}    DateOfStateChange = \""
-                Capture(as: dateOfStateChange) {
-                    Repeat(.digit, count: 4)
-                    "-"
-                    Repeat(.digit, count: 2)
-                    "-"
-                    Repeat(.digit, count: 2)
-                    " "
-                    Repeat(.digit, count: 2)
-                    ":"
-                    Repeat(.digit, count: 2)
-                    ":"
-                    Repeat(.digit, count: 2)
-                    " +"
-                    Repeat(.digit, count: 4)
-                } transform: {
-
-                    let dateFormatter = ISO8601DateFormatter()
-                    dateFormatter.formatOptions = [
-                        .withDay,
-                        .withMonth,
-                        .withYear,
-                        .withTime,
-                        .withTimeZone,
-                        .withColonSeparatorInTime,
-                        .withDashSeparatorInDate,
-                        .withInternetDateTime,
-                        .withSpaceBetweenDateAndTime
-                    ]
-
-                    let captured = String($0)
-                    return dateFormatter.date(from: captured)
-                }
-                "\";"
-
-                // In case there are unaccounted for properties.
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-            // `    DestinationID = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";`
-            Optionally {
-                "\u{A}    DestinationID = \""
-                Capture(as: destinationId) {
-                    OneOrMore {
-                        CharacterClass(
-                                .anyOf("-"),
-                                ("A"..."Z"),
-                                ("0"..."9")
-                        )
-                    }
-                } transform: {
-                   String($0)
-                }
-                "\";"
-
-                // In case there are unaccounted for properties.
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-
-            // `    Percent = "-1";`
-            Optionally {
-                "\u{A}    Percent = \""
-                TryCapture(as: percent) {
-                    Regex {
-                        Optionally {
-                            "-"
-                        }
-                        OneOrMore(.digit)
-                    }
-                } transform: {
-                    Double($0)
-                }
-                "\";"
-
-                // In case there are unaccounted for properties.
-                ZeroOrMore(.reluctant) {
-                    .any
-                }
-            }
-
-            // Running is always present.
-            // `    Running = 0;`
-            "\u{A}    Running = "
-            TryCapture(as: running) {
-                One(.digit)
-            } transform: {
-                String($0) == "1"
-            }
-            ";"
-
-
-            // In case there are unaccounted for properties.
-            ZeroOrMore(.reluctant) {
-                .any
-            }
-        }
-        .anchorsMatchLineEndings()
-
-            return nil
-        }
-
-        self.backupPhase = matches[backupPhase] ?? nil
-
-        self.clientId = String(matches[clientId])
-
-        self.dateOfStateChange = matches[dateOfStateChange] ?? nil
-
-
-        self.destinationId = matches[destinationId]
-//            self.destinationMountPoint = matches[destinationMountPoint]
-            self.destinationMountPoint = nil
-
-        self.percent = matches[percent] ?? nil
-
-        self.running = matches[running]
-    }
-
+    public let progress: TmProgress?
+    public let running: IntEncodedBool // = 1;
+    public let stopping: IntEncodedBool? // = 0;
 
     public var description: String {
-        var desc = "Backup session status:\n"
-
-        return desc
+        return ""
+//        var desc = "Backup session status:\n"
+//        return desc
     }
 }
