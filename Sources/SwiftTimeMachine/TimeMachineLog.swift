@@ -50,13 +50,13 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
                 print("\n\nBackup to \(volume) complete.\n\n")
 
                 self.post(name: .TimeMachineLogAfterCompletedBackup, object: self)
-            case _ where previousInfoLogs.get()?.message.starts(with:"Thinning") ?? false:
+            case _ where previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
 
                 print("\n\nBackup to \(volume) and cleanup complete.\n\n")
 
                 self.post(name: .TimeMachineLogAfterThinning, object: self)
-            case _ where previousInfoLogs.get()?.message.starts(with:"Mountpoint") ?? false
-                && previousInfoLogs.get()?.message.starts(with:"Thinning") ?? false:
+            case _ where previousInfoLogs.get()?.message.starts(with: "Mountpoint") ?? false
+                && previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
 
                 print("\n\nBackup to \(volume) complete without cleanup.\n\n")
 
@@ -70,10 +70,8 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
 
         self.post(name: .TimeMachineLogAll, object: self)
 
-        if( logEntry.logType == .Info ) {
+        if  logEntry.logType == .Info {
             previousInfoLogs.append(item: logEntry)
         }
     }
 }
-
-
