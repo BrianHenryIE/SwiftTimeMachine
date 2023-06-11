@@ -37,7 +37,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
 
         let backupPhase = Reference(BackUpPhase?.self)
         let clientId = Reference(Substring.self)
-        let dateOfStateChange = Reference(Date.self)
+        let dateOfStateChange = Reference(Date?.self)
         let destinationMountPoint = Reference(String?.self)
         let percent = Reference(Double?.self)
         let running = Reference(Bool.self)
@@ -84,6 +84,48 @@ public struct TmStatus: TmResult, CustomStringConvertible {
                 }
             }
 
+            // `    DateOfStateChange = "2023-02-27 01:08:48 +0000";
+            Optionally {
+                "\u{A}    DateOfStateChange = \""
+                Capture(as: dateOfStateChange) {
+                    Repeat(.digit, count: 4)
+                    "-"
+                    Repeat(.digit, count: 2)
+                    "-"
+                    Repeat(.digit, count: 2)
+                    " "
+                    Repeat(.digit, count: 2)
+                    ":"
+                    Repeat(.digit, count: 2)
+                    ":"
+                    Repeat(.digit, count: 2)
+                    " +"
+                    Repeat(.digit, count: 4)
+                } transform: {
+
+                    let dateFormatter = ISO8601DateFormatter()
+                    dateFormatter.formatOptions = [
+                        .withDay,
+                        .withMonth,
+                        .withYear,
+                        .withTime,
+                        .withTimeZone,
+                        .withColonSeparatorInTime,
+                        .withDashSeparatorInDate,
+                        .withInternetDateTime,
+                        .withSpaceBetweenDateAndTime
+                    ]
+
+                    let captured = String($0)
+                    return dateFormatter.date(from: captured)
+                }
+                "\";"
+
+                // In case there are unaccounted for properties.
+                ZeroOrMore(.reluctant) {
+                    .any
+                }
+            }
             // `    Percent = "-1";`
             Optionally {
                 "\u{A}    Percent = \""
@@ -130,8 +172,7 @@ public struct TmStatus: TmResult, CustomStringConvertible {
 
         self.clientId = String(matches[clientId])
 
-//        self.dateOfStateChange = matches[dateOfStateChange] ?? nil
-        self.dateOfStateChange = nil
+        self.dateOfStateChange = matches[dateOfStateChange] ?? nil
 
 
 //            self.destinationMountPoint = matches[destinationMountPoint]
