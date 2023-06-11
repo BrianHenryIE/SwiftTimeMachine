@@ -7,13 +7,13 @@ import Foundation
 import RegexBuilder
 
 extension TmStatus {
-
     public enum BackUpPhase: String, Decodable {
         case PreparingSourceVolumes = "PreparingSourceVolumes"
         case FindingChanges = "FindingChanges"
+        case ThinningPreBackup = "ThinningPreBackup"
         case Copying = "Copying"
+        case ThinningPostBackup = "ThinningPostBackup"
     }
-
 }
 
 public struct TmStatus: TmResult, Decodable {
