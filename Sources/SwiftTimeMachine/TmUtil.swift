@@ -6,6 +6,8 @@ import Foundation
 
 open class TmUtil {
 
+    public init(){}
+
     // Usage: tmutil version
     public func version() -> TmVersion? {
         let execResult = execTmUtilAsString(args: ["version"])

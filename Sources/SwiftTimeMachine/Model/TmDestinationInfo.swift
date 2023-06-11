@@ -12,18 +12,18 @@ extension TmDestinationInfo.Destination {
 }
 
 extension TmDestinationInfo {
-        struct Destination: Decodable {
+        public struct Destination: Decodable {
 
                 // Name          : 9168227426-F4
-                let name: String
+                public let name: String
                 // Kind          : Local
-                let kind: Kind
+                public let kind: Kind
                 // Mount Point   : /Volumes/9168227426-F4
-                let mountPoint: String?
+                public let mountPoint: String?
                 // ID            : 511D3A0B-8810-4704-B45B-E2A2FFC26DAE
-                let id: String
+                public let id: String
 
-                let lastDestination: IntEncodedBool?
+                public let lastDestination: IntEncodedBool?
 
                 private enum CodingKeys: String, CodingKey {
                         case kind = "Kind"
@@ -37,7 +37,7 @@ extension TmDestinationInfo {
 
 public struct TmDestinationInfo: Decodable {
 
-        let destinations: [Destination]
+        public let destinations: [Destination]
 
         private enum CodingKeys: String, CodingKey {
                 case destinations = "Destinations"
