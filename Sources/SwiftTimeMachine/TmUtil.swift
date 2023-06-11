@@ -21,6 +21,10 @@ open class TmUtil {
         return result
     }
 
+    public func status() -> TmStatus? {
+        TmStatusDecoder().decode(from: execTmUtil(args: ["status"]))
+    }
+
     private func execTmUtilAsString(args: [String], host: String? = nil) -> String {
         let outputData = execTmUtil(args: args)
         let outputString = String(decoding: outputData, as: UTF8.self)

@@ -1,8 +1,8 @@
 //
 // Created by Brian Henry on 6/10/23.
 //
-// The TM status messages are not JSON, but quite similar. (what are they?!)
 //
+// After writing this I learned that adding `-X` to `tmutil status` will return XML/plist.
 
 import Foundation
 
@@ -113,6 +113,11 @@ extension KeyedDecodingContainer {
 }
 
 class TmStatusDecoder: JSONDecoder {
+
+    func decode(from data: Input) -> TmStatus? {
+        try? decode(TmStatus.self, from: data)
+    }
+
     override func decode<T>(_ type: T.Type, from: Input) throws -> T where T: Decodable {
 
         keyDecodingStrategy = .custom(TmStatusKey.decodingStrategy)

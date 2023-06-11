@@ -30,4 +30,11 @@ final class TmUtilTests: XCTestCase {
         XCTAssertEqual( .local, destination!.kind )
     }
 
+    func testStatus() {
+        let tmUtil = TmUtil()
+
+        let status = tmUtil.status()
+
+        XCTAssertEqual( "com.apple.backupd", status!.clientID )
+    }
 }
