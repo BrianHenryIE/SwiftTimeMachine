@@ -4,13 +4,20 @@
 
 import Foundation
 
+extension TmDestinationInfo.Destination {
+        public enum Kind: String, Decodable {
+                case local = "Local"
+                case network = "Network"
+        }
+}
+
 extension TmDestinationInfo {
         struct Destination: Decodable {
 
                 // Name          : 9168227426-F4
                 let name: String
                 // Kind          : Local
-                let kind: String
+                let kind: Kind
                 // Mount Point   : /Volumes/9168227426-F4
                 let mountPoint: String?
                 // ID            : 511D3A0B-8810-4704-B45B-E2A2FFC26DAE

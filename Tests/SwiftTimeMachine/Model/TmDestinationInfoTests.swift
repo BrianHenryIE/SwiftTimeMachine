@@ -56,7 +56,7 @@ final class TmDestinationInfoTests: XCTestCase {
         // Name          : 9168227426-F4
         XCTAssertEqual("9168227426-F4", destination.name)
         // Kind          : Local
-        XCTAssertEqual("Local", destination.kind)
+        XCTAssertEqual( .local, destination.kind)
         // ID            : 511D3A0B-8810-4704-B45B-E2A2FFC26DAE
         XCTAssertEqual("511D3A0B-8810-4704-B45B-E2A2FFC26DAE", destination.id)
 
