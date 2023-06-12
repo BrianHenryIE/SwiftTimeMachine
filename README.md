@@ -1,6 +1,6 @@
 # Swift Time Machine
 
-Parses Time Machine logs and `tmutil` output. The goal (WIP) is to automatically unmount USB drives after backups complete.
+Parses Time Machine logs and `tmutil` output. The goal is to automatically unmount USB drives after backups complete: [BrianHenryIE/UnmountVolumeAfterTimeMachine](https://github.com/BrianHenryIE/UnmountVolumeAfterTimeMachine)
 
 > $ /usr/bin/tmutil 
 
