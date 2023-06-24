@@ -13,7 +13,7 @@ final class TmStatusTests: XCTestCase {
 
     // Let's check does everything even parse before checking values
     func testCanParseAll() throws {
-        for number in 1..<5 {
+        for number in 1...5 {
 
             let str = String(number)
             let paddingZero = String(repeating: "0", count: 2 - str.count)

@@ -13,7 +13,7 @@ final class TmDestinationInfoTests: XCTestCase {
     // Let's check does everything even parse before checking values
     func testCanParseAtAll() throws {
 
-        for number in 1..<2 {
+        for number in 1...2 {
 
             let str = String(number)
             let filename = "destinationinfo-xml\(number)"
