@@ -64,7 +64,7 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
                 self.post(name: .TimeMachineLogAfterCompletedBackupNoThinning, object: self)
             default:
 // TODO: Getting a lot of empty logMessage here
-                os_log( "%public%@ message followed: %public%@", logMessage, previousLogMessage)
+//                os_log( "%public%@ message followed: %public%@", logMessage, previousLogMessage)
                 break
             }
 
