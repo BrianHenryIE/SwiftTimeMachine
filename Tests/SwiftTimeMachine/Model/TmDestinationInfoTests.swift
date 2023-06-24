@@ -76,18 +76,4 @@ final class TmDestinationInfoTests: XCTestCase {
     }
 
 
-    private func getFileContents( filename: String ) -> String? {
-
-        let bundle = Bundle.module
-
-        guard let path = bundle.path(forResource: filename, ofType: "txt"),
-              let content = try? String(contentsOfFile: path)
-        else {
-            continueAfterFailure = false
-            XCTFail("File error: \(filename).txt")
-            return nil
-        }
-
-        return content
-    }
 }
