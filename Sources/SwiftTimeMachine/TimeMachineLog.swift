@@ -9,6 +9,7 @@
 import Foundation
 import DequeModule
 import BHSwiftOSLogStream
+import OSLog
 
 public extension Notification.Name {
 
@@ -47,22 +48,23 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
             switch previousLogMessage {
             case _ where previousInfoLogs.get()?.message.contains("Completed backup") ?? false:
 
-                print("\n\nBackup to \(volume) complete.\n\n")
+                os_log( "Backup to %public%@ complete.", volume )
 
                 self.post(name: .TimeMachineLogAfterCompletedBackup, object: self)
             case _ where previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
 
-                print("\n\nBackup to \(volume) and cleanup complete.\n\n")
+                os_log( "Backup to %public%@ and cleanup complete.", volume )
 
                 self.post(name: .TimeMachineLogAfterThinning, object: self)
             case _ where previousInfoLogs.get()?.message.starts(with: "Mountpoint") ?? false
                 && previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
 
-                print("\n\nBackup to \(volume) complete without cleanup.\n\n")
+                os_log( "Backup to %public%@ complete without cleanup.", volume )
 
                 self.post(name: .TimeMachineLogAfterCompletedBackupNoThinning, object: self)
             default:
-                print("\(logMessage) message followed: \(previousInfoLogs.get()?.message ?? "nothing")")
+// TODO: Getting a lot of empty logMessage here
+                os_log( "%public%@ message followed: %public%@", logMessage, previousInfoLogs.get()?.message ?? "nothing")
                 break
             }
 
