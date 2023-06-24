@@ -26,9 +26,9 @@ final class TmStatusTests: XCTestCase {
 
             let tmStatusDecoder = TmStatusDecoder()
 
-            try tmStatusDecoder.decode(TmStatus.self, from: Data(content.utf8))
+            let result = try tmStatusDecoder.decode(TmStatus.self, from: Data(content.utf8))
 
-            XCTAssertTrue(true)
+            XCTAssertNotNil(result)
         }
     }
 

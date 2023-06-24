@@ -27,7 +27,7 @@ final class TmDestinationInfoTests: XCTestCase {
 
             let result = decoder.decode(from: Data(content.utf8))
 
-            XCTAssertTrue(true)
+            XCTAssertNotNil(result)
         }
 
     }
