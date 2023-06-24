@@ -43,7 +43,7 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
                 options: .regularExpression),
             let previousLogMessage = previousInfoLogs.get() {
 
-            let volume = logMessage[captureRange]
+            let volume = logMessage[captureRange].description
 
             switch previousLogMessage {
             case _ where previousInfoLogs.get()?.message.contains("Completed backup") ?? false:

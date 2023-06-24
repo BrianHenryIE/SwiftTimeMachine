@@ -5,6 +5,7 @@
 // After writing this I learned that adding `-X` to `tmutil status` will return XML/plist.
 
 import Foundation
+import OSLog
 
 public typealias StringEncodedBool = Bool
 public typealias IntEncodedBool = Bool
