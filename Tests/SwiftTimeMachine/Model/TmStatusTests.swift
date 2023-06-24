@@ -77,7 +77,7 @@ final class TmStatusTests: XCTestCase {
         }
 
         // BackupPhase = PreparingSourceVolumes;
-        XCTAssertEqual( TmStatus.BackUpPhase.PreparingSourceVolumes, tmStatus.backupPhase! )
+        XCTAssertEqual( TmCurrentPhase.PreparingSourceVolumes, tmStatus.backupPhase! )
 
         // DateOfStateChange = "2023-02-27 01:08:48 +0000";
         var dateComponents = DateComponents()

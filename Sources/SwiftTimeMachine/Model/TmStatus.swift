@@ -6,19 +6,9 @@
 import Foundation
 import RegexBuilder
 
-extension TmStatus {
-    public enum BackUpPhase: String, Decodable {
-        case PreparingSourceVolumes = "PreparingSourceVolumes"
-        case FindingChanges = "FindingChanges"
-        case ThinningPreBackup = "ThinningPreBackup"
-        case Copying = "Copying"
-        case ThinningPostBackup = "ThinningPostBackup"
-    }
-}
-
 public struct TmStatus: TmResult, Decodable {
 
-    public let backupPhase: BackUpPhase?
+    public let backupPhase: TmCurrentPhase?
     public let clientID: String // = "com.apple.backupd";
     public let dateOfStateChange: Date? // = "2023-02-27 01:11:08 +0000";
     public let destinationID: String? // UUID? = "8818CBEE-8A5D-4859-A4A7-4B3B7885CFEB";
