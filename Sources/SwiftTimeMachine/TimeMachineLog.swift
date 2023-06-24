@@ -41,30 +41,30 @@ open class TimeMachineLog: NotificationCenter, LogStreamDelegateProtocol {
 
         if let captureRange = logMessage.range(of: #"Mountpoint '(/Volumes/.*?)' is still valid"#,
                 options: .regularExpression),
-            let previousLogMessage = previousInfoLogs.get() {
+           let previousLogMessage = previousInfoLogs.get()?.message {
 
             let volume = logMessage[captureRange].description
 
             switch previousLogMessage {
-            case _ where previousInfoLogs.get()?.message.contains("Completed backup") ?? false:
+            case _ where previousLogMessage.contains("Completed backup") ?? false:
 
                 os_log( "Backup to %public%@ complete.", volume )
 
                 self.post(name: .TimeMachineLogAfterCompletedBackup, object: self)
-            case _ where previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
+            case _ where previousLogMessage.starts(with: "Thinning") ?? false:
 
                 os_log( "Backup to %public%@ and cleanup complete.", volume )
 
                 self.post(name: .TimeMachineLogAfterThinning, object: self)
-            case _ where previousInfoLogs.get()?.message.starts(with: "Mountpoint") ?? false
-                && previousInfoLogs.get()?.message.starts(with: "Thinning") ?? false:
+            case _ where logMessage.starts(with: "Mountpoint") ?? false
+                    && previousLogMessage.starts(with: "Thinning") ?? false:
 
                 os_log( "Backup to %public%@ complete without cleanup.", volume )
 
                 self.post(name: .TimeMachineLogAfterCompletedBackupNoThinning, object: self)
             default:
 // TODO: Getting a lot of empty logMessage here
-                os_log( "%public%@ message followed: %public%@", logMessage, previousInfoLogs.get()?.message ?? "nothing")
+                os_log( "%public%@ message followed: %public%@", logMessage, previousLogMessage)
                 break
             }
 
